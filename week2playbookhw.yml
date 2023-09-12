@@ -1,0 +1,25 @@
+---
+- name: Gather Hostnames
+  hosts: cislinuxserver
+  gather_facts: true
+
+  tasks:
+    - name: get input of Linux distro and IP address, output as message
+      ansible.builtin.debug:
+        msg: "this system is running {{ansible_facts['distribution_file_variety']}} and has an ip address of: {{ansible_facts['ens33']['ipv4']['address']}}"
+
+    - name: output cpu
+      ansible.builtin.debug:
+        msg: "This system has CPU architecture of: {{ansible_facts['architecture']}}"
+
+    - name: output disksize
+      ansible.builtin.debug:
+        msg: "This system has a disksize of: {{ansible_facts['devices']['dm-0']['size']}}"
+
+    - name: output total RAM
+      ansible.builtin.debug:
+        msg: "This system has a total RAM of: {{ansible_facts['memtotal_mb']}}"
+
+    - name: output processor core number
+      ansible.builtin.debug:
+        msg: "This system has this many cores: {{ansible_facts['processor_cores']}}"
